@@ -27,6 +27,7 @@ format:
     preview-links: true
     crossrefs-hover: true
     link-external-icon: true
+  pptx: default
 execute:
   echo: true
   warning: false
@@ -87,11 +88,16 @@ knitr:
 
 ## Images
 
+:::: {.columns}
+::: {.column width=50%}
 ```
 ![Penn State shield from <https://brand.psu.edu/images/backgrounds/penn-state-shield.jpg>](https://brand.psu.edu/images/backgrounds/penn-state-shield.jpg)
 ```
-
+:::
+::: {.column width=50%}
 ![Penn State shield from <https://brand.psu.edu/images/backgrounds/penn-state-shield.jpg>](https://brand.psu.edu/images/backgrounds/penn-state-shield.jpg)
+:::
+::::
 
 ## Controlling images
 
