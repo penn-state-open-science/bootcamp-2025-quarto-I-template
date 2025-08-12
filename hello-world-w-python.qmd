@@ -53,8 +53,6 @@ In R:
 ```{r}
 #| label: fig-histogram-two-samples
 #| fig-cap: "Histogram of two *n*=1,000 samples whose means differ by 0.5."
-#| lst-label: lst-histogram-two-samples
-#| lst-cap: Code to generate the histogram.
 #| warning: false
 
 library(ggplot2)                                                  # <1>
@@ -75,6 +73,46 @@ rand_data |>                                                      # <4>
 2. Create random data.
 3. Create a data frame (rectangular table of data) with two variables (columns): `value` and `sample`.
 4. 'Pipe' (`|>') the data to `ggplot` to make a histogram.
+
+In Python:
+
+::: {.callout-note}
+
+Since we are rendering this document within RStudio, we need to configure RStudio to process the Python code. 
+To see how this is done, expand the code chunks below by clicking on the 'arrow' icons.
+
+```{r}
+#| label: setup-python-within-r
+#| lst-lbl: lst-setup-reticulate-for-python-in-r
+#| code-fold: true
+
+# Configure Python environment
+# https://support.posit.co/hc/en-us/articles/1500012574101-Installing-Python-packages-in-Posit-Cloud
+
+library(reticulate)
+reticulate::install_python(version = "3.13")
+virtualenv_create("myenv")
+use_virtualenv("myenv", required = TRUE)
+virtualenv_install("myenv", c("matplotlib"))
+```
+ 
+:::
+
+
+Now we can create the plot in Python
+
+```{python}
+#| label: fig-plot
+#| fig-cap: Some incredibly exciting data, I think.
+#| lst-label: lst-plot
+#| lst-cap: Code to generate a simple plot in Python
+
+import matplotlib.pyplot as plt
+
+plt.plot([1,23,2,4])
+plt.show()
+```
+
 
 ### Tables
 
@@ -105,7 +143,7 @@ $$ax^2+bx+c$$ {#eq-polynomial}
 We can write Quarto code so that we can easily create linked cross-references to images in our document.
 For example, @fig-quarto-logo links to the Quarto logo; @fig-bootcamp-banner links to the Bootcamp banner;  @fig-histogram-two-samples links to the histogram we just made;  @tbl-workshop-schedule links to the table; and @eq-polynomial links to the display (centered) equation.
 
-And by adding labels to code chunks, we can do the same thing for code. The code in @lst-histogram-two-samples produced the figure in @fig-histogram-two-samples.
+And by adding labels to code chunks, we can do the same thing for code. The code in @lst-plot produces the figure in @fig-plot.
 
 ## Under the hood
 
@@ -113,6 +151,8 @@ And by adding labels to code chunks, we can do the same thing for code. The code
 
 Quarto, like Rmarkdown, extends [Markdown](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3DTrv2TKgSkq0%26t%3D10&ved=2ahUKEwip47OKgrWOAxWvFFkFHY51AzoQma4LegQIRBAC&usg=AOvVaw1SWscA0dixgr35NkS9OzLA). With Markdown, we write in plain text, but add special characters that format our text or code, or retrieve resources we want for our document. 
 For example, we can make text *italic*, **bold**, ***bold and italicized***, or ~~struck through~~. We can have superscripts^1^ and subscripts~1~.
+
+
 
 We can make unordered lists:
 
@@ -138,11 +178,17 @@ for complete documentation about the Markdown features Quarto supports.
 
 ### Code
 
-Quarto treats text separated from other portions by triple backticks as code.
+Quarto treats text separated from other portions by triple backticks ("```") as code. 
 
 ````markdown
 ```{{r}}
 this_is_r <- TRUE
+```
+````
+
+````markdown
+```{{python}}
+this_is_python = True
 ```
 ````
 
